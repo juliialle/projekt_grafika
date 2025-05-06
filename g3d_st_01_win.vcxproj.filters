@@ -110,4 +110,8 @@
       <Filter>Pliki zasobów</Filter>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <Object Include="apple.obj" />
+    <Object Include="apple_tree.obj" />
+  </ItemGroup>
 </Project>
