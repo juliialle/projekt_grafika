@@ -113,5 +113,17 @@
   <ItemGroup>
     <Object Include="apple.obj" />
     <Object Include="apple_tree.obj" />
+    <Object Include="grass.obj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="grass.png">
+      <Filter>Pliki zasobów</Filter>
+    </Image>
+    <Image Include="apple_text.png">
+      <Filter>Pliki zasobów</Filter>
+    </Image>
+    <Image Include="tree_text.png">
+      <Filter>Pliki zasobów</Filter>
+    </Image>
   </ItemGroup>
 </Project>
