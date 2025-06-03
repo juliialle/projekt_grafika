@@ -45,11 +45,14 @@
   <ItemGroup>
     <None Include="f_constant.glsl" />
     <None Include="f_colored.glsl" />
+    <None Include="f_grass.glsl" />
     <None Include="f_lambert.glsl" />
     <None Include="f_lamberttextured.glsl" />
     <None Include="f_textured.glsl" />
+    <None Include="g_grass.glsl" />
     <None Include="v_constant.glsl" />
     <None Include="v_colored.glsl" />
+    <None Include="v_grass.glsl" />
     <None Include="v_lambert.glsl" />
     <None Include="v_lamberttextured.glsl" />
     <None Include="v_textured.glsl" />
@@ -66,6 +69,7 @@
     </Object>
   </ItemGroup>
   <ItemGroup>
+    <Image Include="..\..\..\..\Downloads\grass2.png" />
     <Image Include="apple_text.png" />
     <Image Include="grass.png" />
     <Image Include="tree_text.png" />

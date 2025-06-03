@@ -109,6 +109,15 @@
     <None Include="v_textured.glsl">
       <Filter>Pliki zasobów</Filter>
     </None>
+    <None Include="v_grass.glsl">
+      <Filter>Pliki zasobów</Filter>
+    </None>
+    <None Include="f_grass.glsl">
+      <Filter>Pliki zasobów</Filter>
+    </None>
+    <None Include="g_grass.glsl">
+      <Filter>Pliki zasobów</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Object Include="apple.obj" />
@@ -123,6 +132,9 @@
       <Filter>Pliki zasobów</Filter>
     </Image>
     <Image Include="tree_text.png">
+      <Filter>Pliki zasobów</Filter>
+    </Image>
+    <Image Include="..\..\..\..\Downloads\grass2.png">
       <Filter>Pliki zasobów</Filter>
     </Image>
   </ItemGroup>

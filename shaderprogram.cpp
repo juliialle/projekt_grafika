@@ -25,6 +25,8 @@ ShaderProgram *spConstant;
 ShaderProgram* spColored;
 ShaderProgram* spTextured;
 ShaderProgram* spLambertTextured;
+ShaderProgram* spGrass;
+
 
 
 void initShaders() {
@@ -33,6 +35,8 @@ void initShaders() {
 	spTextured = new ShaderProgram("v_textured.glsl", NULL, "f_textured.glsl");
 	spColored = new ShaderProgram("v_colored.glsl", NULL, "f_colored.glsl");
 	spLambertTextured = new ShaderProgram("v_lamberttextured.glsl", NULL, "f_lamberttextured.glsl");
+	spGrass = new ShaderProgram("v_grass.glsl", "g_grass.glsl", "f_grass.glsl");
+
 }
 
 void freeShaders() {
@@ -41,6 +45,7 @@ void freeShaders() {
 	delete spTextured;
 	delete spColored;
 	delete spLambertTextured;
+	delete spGrass;
 }
 
 //Procedura wczytuje plik do tablicy znaków.
