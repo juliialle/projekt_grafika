@@ -169,8 +169,7 @@ void initOpenGLProgram(GLFWwindow* window) {
 	initShaders();
 	//************Tutaj umieszczaj kod, który należy wykonać raz, na początku programu************	
 	glEnable(GL_DEPTH_TEST);
-	glEnable(GL_LIGHTING);
-	glEnable(GL_LIGHT0);
+
 	apple_text = readTexture2("apple_text.png");
 	tree_text = readTexture2("tree_text.png");
 	grass_text = readTexture2("grass2.png");
@@ -187,30 +186,35 @@ void freeOpenGLProgram(GLFWwindow* window) {
 }
 
 void drawModel(Models::ObjModel& model, GLuint tex, glm::mat4 P, glm::mat4 V, glm::mat4 M) {
+	spLambertTextured->use();
 
-	spTextured->use(); //Aktywuj program cieniujący
+	glUniformMatrix4fv(spLambertTextured->u("P"), 1, false, glm::value_ptr(P));
+	glUniformMatrix4fv(spLambertTextured->u("V"), 1, false, glm::value_ptr(V));
+	glUniformMatrix4fv(spLambertTextured->u("M"), 1, false, glm::value_ptr(M));
 
-	glUniformMatrix4fv(spTextured->u("P"), 1, false, glm::value_ptr(P)); //Załaduj do programu cieniującego macierz rzutowania
-	glUniformMatrix4fv(spTextured->u("V"), 1, false, glm::value_ptr(V)); //Załaduj do programu cieniującego macierz widoku
-	glUniformMatrix4fv(spTextured->u("M"), 1, false, glm::value_ptr(M)); //Załaduj do programu cieniującego macierz modelu
+	glm::vec4 lightDir = glm::vec4(0.2f, 1.0f, 0.3f, 0.0f);
+	glUniform4fv(spTextured->u("lightDir"), 1, glm::value_ptr(lightDir));
 
+	glEnableVertexAttribArray(spLambertTextured->a("vertex"));
+	glVertexAttribPointer(spLambertTextured->a("vertex"), 4, GL_FLOAT, false, 0, model.vertices);
 
-	glEnableVertexAttribArray(spTextured->a("vertex"));
-	glVertexAttribPointer(spTextured->a("vertex"), 4, GL_FLOAT, false, 0, model.vertices); //Współrzędne wierzchołków bierz z tablicy myCubeVertices
+	glEnableVertexAttribArray(spLambertTextured->a("normal"));
+	glVertexAttribPointer(spLambertTextured->a("normal"), 4, GL_FLOAT, false, 0, model.normals);
 
-	glEnableVertexAttribArray(spTextured->a("texCoord"));
-	glVertexAttribPointer(spTextured->a("texCoord"), 2, GL_FLOAT, false, 0, model.texCoords); //Współrzędne teksturowania bierz z tablicy myCubeTexCoords
+	glEnableVertexAttribArray(spLambertTextured->a("texCoord"));
+	glVertexAttribPointer(spLambertTextured->a("texCoord"), 2, GL_FLOAT, false, 0, model.texCoords);
 
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, tex);
-	glUniform1i(spTextured->u("tex"), 0);
+	glUniform1i(spLambertTextured->u("tex"), 0);
 
 	glDrawArrays(GL_TRIANGLES, 0, model.vertexCount);
 
-	glDisableVertexAttribArray(spTextured->a("vertex"));
-	glDisableVertexAttribArray(spTextured->a("color"));
-
+	glDisableVertexAttribArray(spLambertTextured->a("vertex"));
+	glDisableVertexAttribArray(spLambertTextured->a("normal"));
+	glDisableVertexAttribArray(spLambertTextured->a("texCoord"));
 }
+
 
 void drawModelGrass(Models::ObjModel& model, glm::mat4 P, glm::mat4 V, glm::mat4 M, GLuint grassTextureID) {
 	spGrass->use();
@@ -255,11 +259,9 @@ void drawScene(GLFWwindow* window) {
 
 	glm::mat4 V = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
 
-
 	glm::mat4 P = glm::perspective(glm::radians(50.0f), 1.0f, 0.1f, 100.0f);
-
-	// oswietlenie do zrobienia
 	
+	//rysowanie trawy
 	drawModelGrass(grass, P, V, M, grass_text);
 
 	//rysowanie drzew
@@ -357,7 +359,6 @@ int main(void)
 	}
 
 	initOpenGLProgram(window); //Operacje inicjujące
-
 
 	//Główna pętla	
 	while (!glfwWindowShouldClose(window)) //Tak długo jak okno nie powinno zostać zamknięte

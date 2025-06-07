@@ -73,6 +73,7 @@
     <Image Include="apple_text.png" />
     <Image Include="grass.png" />
     <Image Include="tree_text.png" />
+    <Image Include="tree_text1.png" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

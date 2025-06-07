@@ -137,5 +137,8 @@
     <Image Include="..\..\..\..\Downloads\grass2.png">
       <Filter>Pliki zasobów</Filter>
     </Image>
+    <Image Include="tree_text1.png">
+      <Filter>Pliki zasobów</Filter>
+    </Image>
   </ItemGroup>
 </Project>

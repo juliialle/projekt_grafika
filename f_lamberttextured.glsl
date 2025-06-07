@@ -12,4 +12,5 @@ in vec2 i_tc;
 void main(void) {
     vec4 color=texture(tex,i_tc);
 	pixelColor=vec4(color.rgb*i_nl,color.a);
+
 }
